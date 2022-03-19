@@ -8,7 +8,7 @@
 - name: Create nginx-proxy container
   docker_container:
     name: "proxy"
-    image: "jwilder/nginx-proxy:latest"
+    image: "nginx-proxy/nginx-proxy:alpine"
     restart_policy: "always"
     memory: "50MB"
     log_driver: "awslogs"

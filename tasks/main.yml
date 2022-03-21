@@ -18,7 +18,7 @@
       awslogs-group: "{{ cloudwatch_log_group }}"
       awslogs-stream: "proxy-{{ inventory_hostname }}"
     env:
-      HTTPS_METHOD: "nohttps"
+      HTTPS_METHOD: "{{ https_method }}"
     ports:
       - 80:80
     volumes:

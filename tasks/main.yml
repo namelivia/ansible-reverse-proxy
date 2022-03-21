@@ -5,6 +5,14 @@
       - cloudwatch_region is defined
       - cloudwatch_log_group is defined
 
+- name: Configure proxy settings
+  template:
+    src: nextcloud.j2
+    dest: "{{ hostvars[inventory_hostname].working_directory }}proxy/proxy.conf"
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Create nginx-proxy container
   docker_container:
     name: "proxy"
@@ -17,12 +25,10 @@
       awslogs-region: "{{ cloudwatch_region }}"
       awslogs-group: "{{ cloudwatch_log_group }}"
       awslogs-stream: "proxy-{{ inventory_hostname }}"
-    env:
-      HTTPS_METHOD: "{{ https_method }}"
     ports:
       - 80:80
-      - 443:443
     volumes:
+      - "{{ hostvars[inventory_hostname].working_directory }}proxy/proxy.conf:/etc/nginx/proxy.conf"
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - /etc/nginx/certs
       - /etc/nginx/vhost.d

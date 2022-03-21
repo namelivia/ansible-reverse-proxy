@@ -7,7 +7,7 @@
 
 - name: Configure proxy settings
   template:
-    src: nextcloud.j2
+    src: proxy.j2
     dest: "{{ hostvars[inventory_hostname].working_directory }}proxy/proxy.conf"
     owner: root
     group: root

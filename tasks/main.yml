@@ -5,6 +5,12 @@
       - cloudwatch_region is defined
       - cloudwatch_log_group is defined
 
+- name: Create the config directory
+  file:
+    path: "{{ hostvars[inventory_hostname].working_directory }}proxy"
+    state: directory
+    mode: 0755
+
 - name: Configure proxy settings
   template:
     src: proxy.j2

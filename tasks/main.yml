@@ -17,6 +17,12 @@
     state: directory
     mode: 0755
 
+- name: Create the certs folder
+  file:
+    path: "{{ hostvars[inventory_hostname].working_directory }}proxy/certs"
+    state: directory
+    mode: 0755
+
 - name: Configure proxy settings
   template:
     src: proxy.j2
@@ -42,6 +48,6 @@
     volumes:
       - "{{ hostvars[inventory_hostname].working_directory }}proxy/proxy.conf:/etc/nginx/proxy.conf"
       - "{{ hostvars[inventory_hostname].working_directory }}proxy/vhost.d:/etc/nginx/vhost.d"
+      - "{{ hostvars[inventory_hostname].working_directory }}proxy/certs:/etc/nginx/certs"
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - /etc/nginx/certs
       - /usr/share/nginx/html

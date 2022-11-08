@@ -45,6 +45,7 @@
       awslogs-stream: "proxy-{{ inventory_hostname }}"
     ports:
       - 80:80
+      - 443:443
     volumes:
       - "{{ hostvars[inventory_hostname].working_directory }}proxy/proxy.conf:/etc/nginx/proxy.conf"
       - "{{ hostvars[inventory_hostname].working_directory }}proxy/vhost.d:/etc/nginx/vhost.d"

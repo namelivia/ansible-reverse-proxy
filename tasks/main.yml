@@ -31,6 +31,15 @@
     group: root
     mode: '0644'
 
+- name: Set client max body sizes
+  template:
+    src: vhost.j2
+    dest: "{{ hostvars[inventory_hostname].working_directory }}proxy/vhost.d/{{ vhost }}"
+    owner: root
+    group: root
+    mode: '0644'
+  with_items: "{{ client_max_body_sizes }}"
+
 - name: Create nginx-proxy container
   docker_container:
     name: "proxy"

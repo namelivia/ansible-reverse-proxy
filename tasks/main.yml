@@ -34,7 +34,7 @@
 - name: Set client max body sizes
   template:
     src: vhost.j2
-    dest: "{{ hostvars[inventory_hostname].working_directory }}proxy/vhost.d/{{ vhost }}"
+    dest: "{{ hostvars[inventory_hostname].working_directory }}proxy/vhost.d/{{ item.vhost }}"
     owner: root
     group: root
     mode: '0644'

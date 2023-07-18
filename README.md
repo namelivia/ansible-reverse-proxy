@@ -13,5 +13,5 @@ roles:
 ```
 
 ## Required variables
-
- - `loki_url` Loki endpoint to send logs.
+ - `cloudwatch_region` Cloudwatch region to send the logs to.
+ - `cloudwatch_log_group` Cloudwatch log group to send the logs to.

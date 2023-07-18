@@ -2,7 +2,8 @@
 - name: 'Check mandatory variables are defined'
   assert:
     that:
-      - loki_url is defined
+      - cloudwatch_region is defined
+      - cloudwatch_log_group is defined
 
 - name: Create the config directory
   file:
@@ -46,11 +47,12 @@
     image: "nginxproxy/nginx-proxy:alpine"
     restart_policy: "always"
     memory: "50MB"
+    log_driver: "awslogs"
     cleanup: true
-    log_driver: "loki"
     log_options:
-      loki-url: "{{ loki_url }}"
-      loki-batch-size: "400"
+      awslogs-region: "{{ cloudwatch_region }}"
+      awslogs-group: "{{ cloudwatch_log_group }}"
+      awslogs-stream: "proxy-{{ inventory_hostname }}"
     ports:
       - 80:80
       - 443:443

@@ -44,7 +44,7 @@
 - name: Create nginx-proxy container
   docker_container:
     name: "proxy"
-    image: "nginxproxy/nginx-proxy:1.3.1-alpine"
+    image: "nginxproxy/nginx-proxy:1.0.4-alpine"
     restart_policy: "always"
     memory: "50MB"
     log_driver: "awslogs"

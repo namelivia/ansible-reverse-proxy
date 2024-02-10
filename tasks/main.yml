@@ -8,19 +8,19 @@
   file:
     path: "{{ hostvars[inventory_hostname].working_directory }}proxy"
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Create the vhost.d directory
   file:
     path: "{{ hostvars[inventory_hostname].working_directory }}proxy/vhost.d"
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Create the certs folder
   file:
     path: "{{ hostvars[inventory_hostname].working_directory }}proxy/certs"
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Configure proxy settings
   template:
@@ -43,7 +43,7 @@
 - name: Create nginx-proxy container
   docker_container:
     name: "proxy"
-    image: "nginxproxy/nginx-proxy:1.0.4-alpine"
+    image: "nginxproxy/nginx-proxy:1.4.0-alpine"
     restart_policy: "always"
     memory: "50MB"
     cleanup: true
